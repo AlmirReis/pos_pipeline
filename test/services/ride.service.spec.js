@@ -20,10 +20,12 @@ describe(RideService.name, () => {
 
   it("should retrieve rides from the server when getRides is called", async () => {
     const expectedRides = [createRide()];
-    fetchMock.mockResolvedValue(new Response(JSON.stringify(expectedRides), {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
-    }));
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify(expectedRides), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
 
     const actual = await sut.getRides();
     expect(actual).toStrictEqual(expectedRides);
@@ -33,10 +35,12 @@ describe(RideService.name, () => {
     const expectedRide = createRide({ id: "big-coaster" });
     const rides = [expectedRide, createRide({ id: "small-coaster" })];
 
-    fetchMock.mockResolvedValue(new Response(JSON.stringify(rides), {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
-    }));
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify(rides), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
 
     const actual = await sut.getRide("big-coaster");
     expect(actual).toStrictEqual(expectedRide);

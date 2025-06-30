@@ -44,7 +44,9 @@ describe(RideComponent.name, () => {
     it("should render correct number of height inputs", async () => {
       ride.minHeight = 120;
       await createSut();
-      const peopleSelect = /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect);
+      const peopleSelect = /** @type {HTMLInputElement} */ (
+        sut.by.id.peopleSelect
+      );
       peopleSelect.value = "3";
       peopleSelect.dispatchEvent(new Event("input"));
 
@@ -64,7 +66,9 @@ describe(RideComponent.name, () => {
       ride.minHeight = 120;
       await createSut();
 
-      const peopleSelect = /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect);
+      const peopleSelect = /** @type {HTMLInputElement} */ (
+        sut.by.id.peopleSelect
+      );
       peopleSelect.value = "1";
       peopleSelect.dispatchEvent(new Event("input"));
 
@@ -80,7 +84,9 @@ describe(RideComponent.name, () => {
       ride.minHeight = 140;
       await createSut();
 
-      const peopleSelect = /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect);
+      const peopleSelect = /** @type {HTMLInputElement} */ (
+        sut.by.id.peopleSelect
+      );
       peopleSelect.value = "1";
       peopleSelect.dispatchEvent(new Event("input"));
 
