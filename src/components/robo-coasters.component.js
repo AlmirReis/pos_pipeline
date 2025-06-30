@@ -1,7 +1,7 @@
-import { router } from '../router.js';
-import { cloneTemplate, RoboComponent } from './robo.component.js';
+import { router } from "../router.js";
+import { cloneTemplate, RoboComponent } from "./robo.component.js";
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = `
 <div class="container">
     <div class="row">
@@ -34,13 +34,13 @@ export class RoboCoastersComponent extends RoboComponent {
 
   render() {
     switch (this.route[0]) {
-      case 'ride':
+      case "ride":
         this.view.innerHTML = `<robo-ride ride-id="${this.route[1]}"></robo-ride>`;
         break;
-      case 'success':
+      case "success":
         this.view.innerHTML = `<robo-success></robo-success>`;
         break;
-      case '':
+      case "":
         this.view.innerHTML = `<robo-choose-ride></robo-choose-ride>`;
       default:
         router.navigate([]);
@@ -49,4 +49,4 @@ export class RoboCoastersComponent extends RoboComponent {
   }
 }
 
-customElements.define('robo-coasters', RoboCoastersComponent);
+customElements.define("robo-coasters", RoboCoastersComponent);

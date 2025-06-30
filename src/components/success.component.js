@@ -1,8 +1,8 @@
-import { ridesSummary } from '../pipes/rides-summary.pipe.js';
-import { orderService } from '../services/order.service.js';
-import { cloneTemplate, RoboComponent } from './robo.component.js';
+import { ridesSummary } from "../pipes/rides-summary.pipe.js";
+import { orderService } from "../services/order.service.js";
+import { cloneTemplate, RoboComponent } from "./robo.component.js";
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = `<div class="row">
     <p class="robo-rides col-12 display-6"></p>
   </div>
@@ -25,4 +25,4 @@ export class SuccessComponent extends RoboComponent {
   }
 }
 
-customElements.define('robo-success', SuccessComponent);
+customElements.define("robo-success", SuccessComponent);

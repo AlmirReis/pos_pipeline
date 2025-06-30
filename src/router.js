@@ -6,7 +6,7 @@ export class Router {
   /** @param {Pick<globalThis, 'addEventListener'> & { location: { hash: string }}} win */
   constructor(win = window) {
     this.#global = win;
-    this.#global.addEventListener('hashchange', () => {
+    this.#global.addEventListener("hashchange", () => {
       this.#routerSubscriptions.forEach((sub) => sub(this.#currentRoute));
     });
   }
@@ -25,10 +25,10 @@ export class Router {
   }
 
   get #currentRoute() {
-    return this.#global.location.hash.substring(1).split('/');
+    return this.#global.location.hash.substring(1).split("/");
   }
   set #currentRoute(route) {
-    this.#global.location.hash = `#${route.join('/')}`;
+    this.#global.location.hash = `#${route.join("/")}`;
   }
 }
 

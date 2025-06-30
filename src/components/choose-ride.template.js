@@ -1,4 +1,4 @@
-export const templateChooseRide = document.createElement('template');
+export const templateChooseRide = document.createElement("template");
 templateChooseRide.innerHTML = `
   <div class="row">
     <h2 class="col-12 display-4">Choose your ride - prrrt</h2>
@@ -10,7 +10,7 @@ templateChooseRide.innerHTML = `
   </div>
 `;
 
-export const templateRide = document.createElement('template');
+export const templateRide = document.createElement("template");
 templateRide.innerHTML = `
   <div class="col-12 col-md-6 col-lg-4">
     <div class="card">

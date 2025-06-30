@@ -4,7 +4,7 @@ export class RideService {
    * @returns {Promise<Ride[]>}
    */
   async getRides() {
-    const response = await fetch('api/rides.json');
+    const response = await fetch("api/rides.json");
     return response.json();
   }
 

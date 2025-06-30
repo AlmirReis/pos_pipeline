@@ -13,9 +13,9 @@ export class OrderService {
    * @type {RideOrder}
    */
   get currentOrder() {
-    if (!this.#currentOrder && this.localStorage.getItem('currentOrder')) {
+    if (!this.#currentOrder && this.localStorage.getItem("currentOrder")) {
       this.#currentOrder = JSON.parse(
-        this.localStorage.getItem('currentOrder'),
+        this.localStorage.getItem("currentOrder"),
       );
     }
     return this.#currentOrder;
@@ -25,7 +25,7 @@ export class OrderService {
    */
   set currentOrder(value) {
     this.#currentOrder = value;
-    this.localStorage.setItem('currentOrder', JSON.stringify(value));
+    this.localStorage.setItem("currentOrder", JSON.stringify(value));
   }
 
   clear() {

@@ -1,12 +1,12 @@
-import { router } from '../router.js';
-import { orderService } from '../services/order.service.js';
-import { rideService } from '../services/ride.service.js';
+import { router } from "../router.js";
+import { orderService } from "../services/order.service.js";
+import { rideService } from "../services/ride.service.js";
 import {
   heightTemplate,
   minimalRideHeightTemplate,
   templateRidePage,
-} from './ride.template.js';
-import { RoboComponent, Selector, cloneTemplate } from './robo.component.js';
+} from "./ride.template.js";
+import { RoboComponent, Selector, cloneTemplate } from "./robo.component.js";
 
 export class RideComponent extends RoboComponent {
   /** @type {Ride} */
@@ -34,7 +34,7 @@ export class RideComponent extends RoboComponent {
     /** @type {Person[]} */
     const people = [];
 
-    const heightInputs = [...this.by.id.heightInputs.querySelectorAll('input')];
+    const heightInputs = [...this.by.id.heightInputs.querySelectorAll("input")];
     for (let i = 0; i < this.numPeople; i++) {
       people.push({
         index: i + 1,
@@ -57,18 +57,18 @@ export class RideComponent extends RoboComponent {
         ({ height }) => !this.hasValidHeight(height),
       );
       if (invalidHeights.length) {
-        this.by.id.alert.style.display = 'block';
-        this.by.id.alertText.innerHTML = `${invalidHeights.map(({ index }) => `Person ${index} is too short for this ride`).join('<br />')}`;
+        this.by.id.alert.style.display = "block";
+        this.by.id.alertText.innerHTML = `${invalidHeights.map(({ index }) => `Person ${index} is too short for this ride`).join("<br />")}`;
         return;
       }
     }
     orderService.currentOrder = { ride: this.ride, people };
-    router.navigate(['success']);
+    router.navigate(["success"]);
   };
 
   connectedCallback() {
     this.appendChild(cloneTemplate(templateRidePage));
-    const rideId = this.getAttribute('ride-id');
+    const rideId = this.getAttribute("ride-id");
     rideService.getRide(rideId).then((ride) => {
       if (!ride) {
         router.navigate([]);
@@ -76,9 +76,9 @@ export class RideComponent extends RoboComponent {
       this.ride = ride;
       this.#render();
     });
-    this.by.id.peopleSelect.addEventListener('input', this.handleRideSelect);
-    this.by.id.previousBtn.addEventListener('click', this.cancel);
-    this.by.id.form.addEventListener('submit', this.submit);
+    this.by.id.peopleSelect.addEventListener("input", this.handleRideSelect);
+    this.by.id.previousBtn.addEventListener("click", this.cancel);
+    this.by.id.form.addEventListener("submit", this.submit);
     this.#render();
   }
 
@@ -88,7 +88,7 @@ export class RideComponent extends RoboComponent {
   }
 
   #render() {
-    this.by.id.alert.style.display = 'none';
+    this.by.id.alert.style.display = "none";
     if (this.ride) {
       this.by.id.title.innerText = this.ride.name;
       const img = /** @type {HTMLImageElement}*/ (this.by.id.rideImage);
@@ -101,7 +101,7 @@ export class RideComponent extends RoboComponent {
           this.ride.minHeight.toString();
         this.by.id.heightInputs.replaceChildren(
           p,
-          ...new Array(this.numPeople).fill('').map((_, index) => {
+          ...new Array(this.numPeople).fill("").map((_, index) => {
             const element = cloneTemplate(heightTemplate);
             const row = new Selector(element);
             const label = /** @type {HTMLLabelElement} */ (
@@ -120,4 +120,4 @@ export class RideComponent extends RoboComponent {
     }
   }
 }
-customElements.define('robo-ride', RideComponent);
+customElements.define("robo-ride", RideComponent);

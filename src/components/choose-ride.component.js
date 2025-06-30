@@ -1,7 +1,7 @@
-import { router } from '../router.js';
-import { rideService } from '../services/ride.service.js';
-import { templateChooseRide, templateRide } from './choose-ride.template.js';
-import { RoboComponent, Selector, cloneTemplate } from './robo.component.js';
+import { router } from "../router.js";
+import { rideService } from "../services/ride.service.js";
+import { templateChooseRide, templateRide } from "./choose-ride.template.js";
+import { RoboComponent, Selector, cloneTemplate } from "./robo.component.js";
 
 export class ChooseRideComponent extends RoboComponent {
   /** @type {Ride[]} */
@@ -32,11 +32,11 @@ export class ChooseRideComponent extends RoboComponent {
     const anchor = /** @type {HTMLAnchorElement} */ (row.class.cardLink);
     anchor.href = `#ride/${ride.id}`;
     anchor.innerText = `Choose ${ride.name}`;
-    anchor.addEventListener('click', (e) => {
+    anchor.addEventListener("click", (e) => {
       e.preventDefault();
-      router.navigate(['ride', ride.id]);
+      router.navigate(["ride", ride.id]);
     });
     return element;
   }
 }
-customElements.define('robo-choose-ride', ChooseRideComponent);
+customElements.define("robo-choose-ride", ChooseRideComponent);

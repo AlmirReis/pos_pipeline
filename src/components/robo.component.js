@@ -32,7 +32,7 @@ export class Selector {
 
 /** @param {string} str */
 function toKebabCase(str) {
-  return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  return str.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
 /**
