@@ -1,0 +1,32 @@
+# CI de Nivel 02 - Disparo agendado
+# v5
+
+name: "Execução Agendada"
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+
+jobs:
+  e2e-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalando Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Instalando Yarn
+        run: npm install -g yarn
+
+      - name: Instalando dependências
+        run: yarn install
+
+      - name: Instalando Playwright
+        run: npx playwright install
+
+      - name: Executando Testes E2E
+        run: yarn run e2e
