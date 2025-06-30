@@ -56,10 +56,7 @@ jobs:
 
       - name: Instalando Playwright e navegadores
         run: npx playwright install --with-deps
-
-      - name: Executando Testes E2E
-        run: yarn e2e
-
+     
       - name: Executando Testes E2E
         run: yarn run e2e
 
