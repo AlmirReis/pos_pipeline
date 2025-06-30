@@ -22,8 +22,10 @@ describe(RideComponent.name, () => {
       });
     jest.spyOn(rideService, "getRide").mockReturnValue(Promise.resolve(ride));
   });
+
   afterEach(() => {
-    sut.remove();
+    sut?.remove();
+    jest.clearAllMocks();
   });
 
   it("should navigate back on cancel", async () => {
@@ -31,6 +33,7 @@ describe(RideComponent.name, () => {
     sut.cancel();
     expect(routerNavigateStub).toHaveBeenCalled();
   });
+
   it("should navigate back when ride cannot be found", async () => {
     jest.spyOn(rideService, "getRide").mockResolvedValue(undefined);
     await createSut();
@@ -41,11 +44,14 @@ describe(RideComponent.name, () => {
     it("should render correct number of height inputs", async () => {
       ride.minHeight = 120;
       await createSut();
-      /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect).value = "3";
-      sut.by.id.peopleSelect.dispatchEvent(new Event("input"));
+      const peopleSelect = /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect);
+      peopleSelect.value = "3";
+      peopleSelect.dispatchEvent(new Event("input"));
+
       expect(sut.by.id.heightInputs.querySelectorAll("input")).toHaveLength(3);
     });
   });
+
   describe("submit", () => {
     it("should allow if height check is disabled", async () => {
       ride.minHeight = undefined;
@@ -57,19 +63,31 @@ describe(RideComponent.name, () => {
     it("should allow if person has correct height", async () => {
       ride.minHeight = 120;
       await createSut();
+
+      const peopleSelect = /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect);
+      peopleSelect.value = "1";
+      peopleSelect.dispatchEvent(new Event("input"));
+
       /** @type {HTMLInputElement} */ (
         sut.querySelector("#height-inputs input")
       ).valueAsNumber = 140;
+
       sut.submit(new Event("submit"));
       expect(routerNavigateStub).toHaveBeenCalled();
     });
 
-    it("should not allow person does not have the correct height", async () => {
+    it("should not allow if person does not have the correct height", async () => {
       ride.minHeight = 140;
       await createSut();
+
+      const peopleSelect = /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect);
+      peopleSelect.value = "1";
+      peopleSelect.dispatchEvent(new Event("input"));
+
       /** @type {HTMLInputElement} */ (
         sut.querySelector("#height-inputs input")
       ).valueAsNumber = 120;
+
       sut.submit(new Event("submit"));
       expect(routerNavigateStub).not.toHaveBeenCalled();
     });
