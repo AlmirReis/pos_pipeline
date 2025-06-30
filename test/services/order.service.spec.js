@@ -1,6 +1,6 @@
-import { jest } from '@jest/globals';
-import { OrderService } from '../../src/services/order.service.js';
-import { createRideOrder } from '../helpers.js';
+import { jest } from "@jest/globals";
+import { OrderService } from "../../src/services/order.service.js";
+import { createRideOrder } from "../helpers.js";
 
 describe(OrderService, () => {
   /** @type {OrderService} */
@@ -21,13 +21,13 @@ describe(OrderService, () => {
     sut.clear();
   });
 
-  describe('currentOrder', () => {
-    it('should retrieve from storage', () => {
+  describe("currentOrder", () => {
+    it("should retrieve from storage", () => {
       const expected = createRideOrder();
       storageMock.getItem.mockReturnValue(JSON.stringify(expected));
       expect(sut.currentOrder).toStrictEqual(expected);
     });
-    it('should retrieve undefined when there is no order yes', () => {
+    it("should retrieve undefined when there is no order yes", () => {
       expect(sut.currentOrder).toBe(undefined);
     });
   });

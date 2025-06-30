@@ -4,10 +4,10 @@
  */
 export function createRide(overrides) {
   return {
-    id: 'robo-train',
-    name: 'Robo Choo Choo Train',
-    description: 'A train ride for robots',
-    image: 'https://via.placeholder.com/300x150',
+    id: "robo-train",
+    name: "Robo Choo Choo Train",
+    description: "A train ride for robots",
+    image: "https://via.placeholder.com/300x150",
     ...overrides,
   };
 }

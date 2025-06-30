@@ -1,9 +1,9 @@
-import { jest } from '@jest/globals';
+import { jest } from "@jest/globals";
 
-import { router } from '../../src/router.js';
-import { RideService, rideService } from '../../src/services/ride.service.js';
-import { createRide } from '../helpers.js';
-import { ChooseRideComponent } from '../../src/components/choose-ride.component.js';
+import { router } from "../../src/router.js";
+import { RideService, rideService } from "../../src/services/ride.service.js";
+import { createRide } from "../helpers.js";
+import { ChooseRideComponent } from "../../src/components/choose-ride.component.js";
 
 describe(ChooseRideComponent.name, () => {
   /** @type {ChooseRideComponent} */
@@ -15,27 +15,27 @@ describe(ChooseRideComponent.name, () => {
   let getRidesStub;
 
   beforeEach(() => {
-    navigateStub = jest.spyOn(router, 'navigate').mockImplementation(() => {
+    navigateStub = jest.spyOn(router, "navigate").mockImplementation(() => {
       // idle
     });
-    getRidesStub = jest.spyOn(rideService, 'getRides');
+    getRidesStub = jest.spyOn(rideService, "getRides");
   });
 
   afterEach(() => {
     sut.remove();
   });
 
-  it('should navigate to ride page when chosen a ride', async () => {
+  it("should navigate to ride page when chosen a ride", async () => {
     // Arrange
     const rides = [
-      createRide({ id: 'big-coaster', name: 'Big Coaster', minHeight: 180 }),
+      createRide({ id: "big-coaster", name: "Big Coaster", minHeight: 180 }),
     ];
     getRidesStub.mockResolvedValue(rides);
     createSut();
     await tick();
 
     // Act
-    sut.querySelector('.btn-primary').dispatchEvent(new Event('click'));
+    sut.querySelector(".btn-primary").dispatchEvent(new Event("click"));
 
     // Assert
     expect(navigateStub).toHaveBeenCalled();
@@ -43,7 +43,7 @@ describe(ChooseRideComponent.name, () => {
 
   function createSut() {
     sut = /** @type {ChooseRideComponent} */ (
-      document.createElement('robo-choose-ride')
+      document.createElement("robo-choose-ride")
     );
     return document.body.appendChild(sut);
   }

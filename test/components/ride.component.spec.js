@@ -1,8 +1,8 @@
-import { jest } from '@jest/globals';
-import { router } from '../../src/router.js';
-import { createRide } from '../helpers.js';
-import { RideComponent } from '../../src/components/ride.component.js';
-import { rideService } from '../../src/services/ride.service.js';
+import { jest } from "@jest/globals";
+import { router } from "../../src/router.js";
+import { createRide } from "../helpers.js";
+import { RideComponent } from "../../src/components/ride.component.js";
+import { rideService } from "../../src/services/ride.service.js";
 
 describe(RideComponent.name, () => {
   /** @type {Ride} */
@@ -16,67 +16,67 @@ describe(RideComponent.name, () => {
   beforeEach(() => {
     ride = createRide();
     routerNavigateStub = jest
-      .spyOn(router, 'navigate')
+      .spyOn(router, "navigate")
       .mockImplementation(() => {
         // idle
       });
-    jest.spyOn(rideService, 'getRide').mockReturnValue(Promise.resolve(ride));
+    jest.spyOn(rideService, "getRide").mockReturnValue(Promise.resolve(ride));
   });
   afterEach(() => {
     sut.remove();
   });
 
-  it('should navigate back on cancel', async () => {
+  it("should navigate back on cancel", async () => {
     await createSut();
     sut.cancel();
     expect(routerNavigateStub).toHaveBeenCalled();
   });
-  it('should navigate back when ride cannot be found', async () => {
-    jest.spyOn(rideService, 'getRide').mockResolvedValue(undefined);
+  it("should navigate back when ride cannot be found", async () => {
+    jest.spyOn(rideService, "getRide").mockResolvedValue(undefined);
     await createSut();
     expect(routerNavigateStub).toHaveBeenCalled();
   });
 
-  describe('change people dropdown', () => {
-    it('should render correct number of height inputs', async () => {
+  describe("change people dropdown", () => {
+    it("should render correct number of height inputs", async () => {
       ride.minHeight = 120;
       await createSut();
-      /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect).value = '3';
-      sut.by.id.peopleSelect.dispatchEvent(new Event('input'));
-      expect(sut.by.id.heightInputs.querySelectorAll('input')).toHaveLength(3);
+      /** @type {HTMLInputElement} */ (sut.by.id.peopleSelect).value = "3";
+      sut.by.id.peopleSelect.dispatchEvent(new Event("input"));
+      expect(sut.by.id.heightInputs.querySelectorAll("input")).toHaveLength(3);
     });
   });
-  describe('submit', () => {
-    it('should allow if height check is disabled', async () => {
+  describe("submit", () => {
+    it("should allow if height check is disabled", async () => {
       ride.minHeight = undefined;
       await createSut();
-      sut.submit(new Event('submit'));
+      sut.submit(new Event("submit"));
       expect(routerNavigateStub).toHaveBeenCalled();
     });
 
-    it('should allow if person has correct height', async () => {
+    it("should allow if person has correct height", async () => {
       ride.minHeight = 120;
       await createSut();
       /** @type {HTMLInputElement} */ (
-        sut.querySelector('#height-inputs input')
+        sut.querySelector("#height-inputs input")
       ).valueAsNumber = 140;
-      sut.submit(new Event('submit'));
+      sut.submit(new Event("submit"));
       expect(routerNavigateStub).toHaveBeenCalled();
     });
 
-    it('should not allow person does not have the correct height', async () => {
+    it("should not allow person does not have the correct height", async () => {
       ride.minHeight = 140;
       await createSut();
       /** @type {HTMLInputElement} */ (
-        sut.querySelector('#height-inputs input')
+        sut.querySelector("#height-inputs input")
       ).valueAsNumber = 120;
-      sut.submit(new Event('submit'));
+      sut.submit(new Event("submit"));
       expect(routerNavigateStub).not.toHaveBeenCalled();
     });
   });
 
   async function createSut() {
-    sut = /** @type {RideComponent} */ (document.createElement('robo-ride'));
+    sut = /** @type {RideComponent} */ (document.createElement("robo-ride"));
     document.body.appendChild(sut);
     await nextTick();
   }
