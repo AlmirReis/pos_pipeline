@@ -21,7 +21,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Instalando dependências
-        run: yarn l
+        run: yarn install
 
       - name: Instalando Playwright
         run: yarn playwright install
